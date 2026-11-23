@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: elearning
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/desarrolloIngenios/authentic-platform-aws.git
+    targetRevision: main
+    path: elearning/moodle/helm
+    helm:
+      valueFiles:
+        - ../../../environments/production/values.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: elearning
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: true
+  ignoreDifferences:
+    - group: apps
+      kind: Deployment
+      jsonPointers:
+        - /spec/replicas

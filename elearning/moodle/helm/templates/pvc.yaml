@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "authentic-elearning.fullname" . }}-moodledata
+  namespace: {{ .Release.Namespace }}
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: {{ .Values.moodledata.storageClassName }}
+  resources:
+    requests:
+      storage: {{ .Values.moodledata.size }}

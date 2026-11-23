@@ -1,0 +1,53 @@
+environment: development
+replicaCount: 1
+
+image:
+  repository: TBD
+  tag: TBD
+  pullPolicy: IfNotPresent
+
+cron:
+  enabled: true
+  replicaCount: 1
+
+service:
+  port: 8080
+
+ingress:
+  enabled: true
+  className: nginx
+  hosts: []
+  tls: []
+
+postgresql:
+  secretName: elearning-postgresql
+
+redis:
+  secretName: elearning-redis
+
+moodledata:
+  storageClassName: efs-sc
+  size: 100Gi
+
+secrets:
+  externalSecret: false
+  secretStore: aws-secrets-manager
+
+resources:
+  web:
+    requests:
+      cpu: TBD
+      memory: TBD
+    limits:
+      cpu: TBD
+      memory: TBD
+  cron:
+    requests:
+      cpu: TBD
+      memory: TBD
+    limits:
+      cpu: TBD
+      memory: TBD
+
+serviceAccount:
+  roleArn: ""

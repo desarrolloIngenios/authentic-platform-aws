@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "authentic-elearning.fullname" . }}-web
+  namespace: {{ .Release.Namespace }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: authentic-elearning
+      app.kubernetes.io/component: web
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: authentic-elearning
+        app.kubernetes.io/component: web
+    spec:
+      serviceAccountName: authentic-elearning
+      containers:
+        - name: moodle
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.port }}
+          envFrom:
+            - secretRef:
+                name: {{ .Values.postgresql.secretName }}
+            - secretRef:
+                name: {{ .Values.redis.secretName }}
+          volumeMounts:
+            - name: moodledata
+              mountPath: /var/www/moodledata
+          resources:
+            {{- toYaml .Values.resources.web | nindent 12 }}
+      volumes:
+        - name: moodledata
+          persistentVolumeClaim:
+            claimName: {{ include "authentic-elearning.fullname" . }}-moodledata

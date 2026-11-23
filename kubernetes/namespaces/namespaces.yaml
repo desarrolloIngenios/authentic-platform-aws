@@ -13,3 +13,4 @@ items:
   - {apiVersion: v1, kind: Namespace, metadata: {name: litellm}}
   - {apiVersion: v1, kind: Namespace, metadata: {name: n8n}}
   - {apiVersion: v1, kind: Namespace, metadata: {name: langfuse}}
+  - {apiVersion: v1, kind: Namespace, metadata: {name: elearning}}

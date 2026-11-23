@@ -1,0 +1,6 @@
+environment: development
+replicaCount: 1
+cron:
+  enabled: true
+moodledata:
+  size: 50Gi

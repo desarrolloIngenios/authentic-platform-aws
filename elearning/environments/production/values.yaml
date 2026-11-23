@@ -1,0 +1,6 @@
+environment: production
+replicaCount: 2
+cron:
+  enabled: true
+moodledata:
+  size: TBD

@@ -1,0 +1,39 @@
+{{- if .Values.cron.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "authentic-elearning.fullname" . }}-cron
+  namespace: {{ .Release.Namespace }}
+spec:
+  replicas: {{ .Values.cron.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: authentic-elearning
+      app.kubernetes.io/component: cron
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: authentic-elearning
+        app.kubernetes.io/component: cron
+    spec:
+      serviceAccountName: authentic-elearning
+      containers:
+        - name: moodle-cron
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command: ["php", "admin/cli/cron.php"]
+          envFrom:
+            - secretRef:
+                name: {{ .Values.postgresql.secretName }}
+            - secretRef:
+                name: {{ .Values.redis.secretName }}
+          volumeMounts:
+            - name: moodledata
+              mountPath: /var/www/moodledata
+          resources:
+            {{- toYaml .Values.resources.cron | nindent 12 }}
+      volumes:
+        - name: moodledata
+          persistentVolumeClaim:
+            claimName: {{ include "authentic-elearning.fullname" . }}-moodledata
+{{- end }}

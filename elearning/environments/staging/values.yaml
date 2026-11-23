@@ -1,0 +1,6 @@
+environment: staging
+replicaCount: 2
+cron:
+  enabled: true
+moodledata:
+  size: 100Gi

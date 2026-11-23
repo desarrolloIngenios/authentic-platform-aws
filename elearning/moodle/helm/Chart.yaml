@@ -1,0 +1,6 @@
+apiVersion: v2
+name: authentic-elearning
+description: Moodle/IOMAD Helm chart for AuthenticFarma platforms
+type: application
+version: 0.1.0
+appVersion: "TBD"
