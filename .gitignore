@@ -1,0 +1,15 @@
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+*.tfplan
+*.tfvars
+crash.log
+crash.*.log
+.env
+.env.*
+*.pem
+*.key
+kubeconfig
+credentials*.json
+!.terraform.lock.hcl
+infrastructure/modules/**/.terraform.lock.hcl

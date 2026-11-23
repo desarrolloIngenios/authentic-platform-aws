@@ -1,0 +1,15 @@
+# Namespaces base, preparados sin cargas productivas migradas.
+apiVersion: v1
+kind: List
+items:
+  - {apiVersion: v1, kind: Namespace, metadata: {name: messaging}}
+  - {apiVersion: v1, kind: Namespace, metadata: {name: communications}}
+  - {apiVersion: v1, kind: Namespace, metadata: {name: platform-services}}
+  - {apiVersion: v1, kind: Namespace, metadata: {name: observability}}
+  - {apiVersion: v1, kind: Namespace, metadata: {name: candidatos}}
+  - {apiVersion: v1, kind: Namespace, metadata: {name: empresas}}
+  - {apiVersion: v1, kind: Namespace, metadata: {name: yo-soy}}
+  - {apiVersion: v1, kind: Namespace, metadata: {name: agent-ia}}
+  - {apiVersion: v1, kind: Namespace, metadata: {name: litellm}}
+  - {apiVersion: v1, kind: Namespace, metadata: {name: n8n}}
+  - {apiVersion: v1, kind: Namespace, metadata: {name: langfuse}}

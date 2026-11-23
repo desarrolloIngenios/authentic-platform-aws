@@ -1,0 +1,28 @@
+name: Validate infrastructure and manifests
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify repository structure
+        run: test -f README.md && test -f Makefile
+      - name: Install OpenTofu
+        run: |
+          curl -fsSL https://get.opentofu.org/install-opentofu.sh | sh -s -- --install-method deb
+      - name: Format check
+        run: tofu fmt -check -recursive infrastructure
+      - name: Validate AWS environments
+        run: |
+          for root in infrastructure/bootstrap/state-backend infrastructure/environments/aws-development infrastructure/environments/aws-staging infrastructure/environments/aws-production infrastructure/environments/aws-shared-services; do
+            tofu -chdir="${root}" init -backend=false -input=false
+            tofu -chdir="${root}" validate
+          done
