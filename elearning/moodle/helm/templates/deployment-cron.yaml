@@ -2,21 +2,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "authentic-elearning.fullname" . }}-cron
+  name: {{ include "elearning.fullname" . }}-cron
   namespace: {{ .Release.Namespace }}
 spec:
   replicas: {{ .Values.cron.replicaCount }}
   selector:
     matchLabels:
-      app.kubernetes.io/name: authentic-elearning
+      app.kubernetes.io/name: elearning
       app.kubernetes.io/component: cron
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: authentic-elearning
+        app.kubernetes.io/name: elearning
         app.kubernetes.io/component: cron
     spec:
-      serviceAccountName: authentic-elearning
+      serviceAccountName: elearning
       containers:
         - name: moodle-cron
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
@@ -35,5 +35,5 @@ spec:
       volumes:
         - name: moodledata
           persistentVolumeClaim:
-            claimName: {{ include "authentic-elearning.fullname" . }}-moodledata
+            claimName: {{ include "elearning.fullname" . }}-moodledata
 {{- end }}

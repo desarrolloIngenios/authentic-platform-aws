@@ -1,5 +1,5 @@
 apiVersion: v2
-name: authentic-elearning
+name: elearning
 description: Moodle/IOMAD Helm chart for AuthenticFarma platforms
 type: application
 version: 0.1.0

@@ -1,10 +1,10 @@
 # Plantilla de organización para IOMAD.
 # Completar con valores administrativos aprobados; no contiene credenciales.
 organizations:
-  - code: authentic-academy
+  - code: academy
     name: Authentic Academy
     status: planned
-  - code: authentic-mentors
+  - code: mentors
     name: Authentic Mentors Academy
     status: planned
   - code: yo-soy

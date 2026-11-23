@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: {{ include "authentic-elearning.fullname" . }}-moodledata
+  name: {{ include "elearning.fullname" . }}-moodledata
   namespace: {{ .Release.Namespace }}
 spec:
   accessModes:
