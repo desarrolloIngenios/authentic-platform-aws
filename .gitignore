@@ -13,3 +13,4 @@ kubeconfig
 credentials*.json
 !.terraform.lock.hcl
 infrastructure/modules/**/.terraform.lock.hcl
+*.plan

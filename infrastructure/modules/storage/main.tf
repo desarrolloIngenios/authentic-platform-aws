@@ -28,8 +28,6 @@ resource "aws_efs_file_system" "moodledata" {
   lifecycle_policy {
     transition_to_ia = "AFTER_30_DAYS"
   }
-
-  tags = merge(var.tags, { Name = "${var.name_prefix}-moodledata" })
 }
 
 resource "aws_efs_mount_target" "this" {

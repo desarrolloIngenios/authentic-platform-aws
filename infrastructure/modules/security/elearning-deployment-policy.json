@@ -1,0 +1,64 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "CreateEKSServiceLinkedRole",
+      "Effect": "Allow",
+      "Action": "iam:CreateServiceLinkedRole",
+      "Resource": "arn:aws:iam::889629667448:role/aws-service-role/eks.amazonaws.com/AWSServiceRoleForAmazonEKS",
+      "Condition": {
+        "StringEquals": {
+          "iam:AWSServiceName": "eks.amazonaws.com"
+        }
+      }
+    },
+    {
+      "Sid": "ManageEFS",
+      "Effect": "Allow",
+      "Action": [
+        "elasticfilesystem:CreateFileSystem",
+        "elasticfilesystem:DescribeFileSystems",
+        "elasticfilesystem:CreateMountTarget",
+        "elasticfilesystem:DescribeMountTargets",
+        "elasticfilesystem:DescribeMountTargetSecurityGroups",
+        "elasticfilesystem:ModifyMountTargetSecurityGroups",
+        "elasticfilesystem:TagResource",
+        "elasticfilesystem:DeleteMountTarget",
+        "elasticfilesystem:DeleteFileSystem"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "StringEquals": {
+          "aws:RequestedRegion": "us-east-1",
+          "aws:ResourceTag/Project": "AuthenticFarma360"
+        }
+      }
+    },
+    {
+      "Sid": "CreateEKSNodeGroupServiceLinkedRole",
+      "Effect": "Allow",
+      "Action": "iam:CreateServiceLinkedRole",
+      "Resource": "arn:aws:iam::889629667448:role/aws-service-role/eks-nodegroup.amazonaws.com/AWSServiceRoleForAmazonEKSNodegroup",
+      "Condition": {
+        "StringEquals": {
+          "iam:AWSServiceName": "eks-nodegroup.amazonaws.com"
+        }
+      }
+    },
+    {
+      "Sid": "CreateEKSOIDCProvider",
+      "Effect": "Allow",
+      "Action": [
+        "iam:CreateOpenIDConnectProvider",
+        "iam:GetOpenIDConnectProvider",
+        "iam:TagOpenIDConnectProvider"
+      ],
+      "Resource": "arn:aws:iam::889629667448:oidc-provider/oidc.eks.us-east-1.amazonaws.com/id/*",
+      "Condition": {
+        "StringEquals": {
+          "aws:RequestedRegion": "us-east-1"
+        }
+      }
+    }
+  ]
+}
